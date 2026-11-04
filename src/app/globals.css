@@ -9,6 +9,8 @@
   --burgundy: #6b2d3c;
   --gold: #c5a059;
   --cotton: #ffffff;
+  --footer-background: #1b263b;
+  --footer-foreground: #f5f2eb;
 
   /* Elementos de interfaz */
   --border: #ded8cc;
@@ -17,6 +19,7 @@
   /* Colores semánticos */
   --background: var(--paper);
   --foreground: var(--ink);
+  --footer-background: #1c2536;
 }
 
 .dark {
@@ -34,6 +37,7 @@
   /* Colores semánticos */
   --background: var(--paper);
   --foreground: var(--ink);
+  --footer-background: #191b20;
 }
 
 @theme inline {
@@ -45,6 +49,8 @@
   --color-cotton: var(--cotton);
   --color-border: var(--border);
   --color-muted: var(--muted);
+  --color-footer-background: var(--footer-background);
+  --color-footer-foreground: var(--footer-foreground);
 
   /* Tipografías */
   --font-sans: var(--font-inter);
@@ -61,9 +67,6 @@
 
 * {
   box-sizing: border-box;
-  transition-property: background-color, border-color, color, fill, stroke;
-  transition-duration: 300ms;
-  transition-timing-function: ease;
 }
 
 html {
