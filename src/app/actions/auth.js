@@ -43,10 +43,10 @@ export async function login(_prevState, formData) {
 }
 
 export async function logout() {
-    const referesh = await getRefreshToken()
+    const refresh = await getRefreshToken();
 
     try {
-        if (referesh) {
+        if (refresh) {
             await fetch(`${API_URL}/api/auth/logout/`, {
                 method: "POST",
                 headers: {
