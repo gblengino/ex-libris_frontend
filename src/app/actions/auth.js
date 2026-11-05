@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 import { setTokens, getRefreshToken, clearTokens } from "@/lib/auth";
 import { refresh } from "next/cache";
-import { API_URL } from "@/lib/api";
+import { API_URL, ENDPOINTS } from "@/lib/api";
 
 export async function login(_prevState, formData) {
     const credentials = {
@@ -65,3 +65,38 @@ export async function logout() {
     redirect("/login");
 }
 
+export async function register(_prevState, formData) {
+
+    const newUser = {
+        username: formData.get("username"),
+        email: formData.get("email"),
+        password: formData.get("password"),
+        password2: formData.get("password2"),
+    }
+
+    let res;
+
+    try {
+        res = await fetch(`${API_URL}${ENDPOINTS.register}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newUser),
+            cache: "no-store",
+        });
+    } catch {
+        return { error: "No se pudo conectar al servidor."}
+    }
+
+    const data = await res.json();
+
+    if (!res.ok) {
+        return {
+            errors: data,
+            error: "No se pudo crear la cuenta. Revisa los datos ingresados."
+        }
+    }
+
+    redirect("login");
+}

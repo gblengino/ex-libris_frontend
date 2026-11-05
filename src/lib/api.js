@@ -10,6 +10,7 @@ export const ENDPOINTS = {
     comments: "/api/reviews/comments/",
     readingList: "/api/readinglist/",
     profile: "/api/users/profile/profile/",
+    register: "/api/auth/register/"
 }
 
 export async function apiFetch(path, options = {}) {
