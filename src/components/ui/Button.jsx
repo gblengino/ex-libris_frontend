@@ -24,6 +24,7 @@ export default function Button({
     children,
     variant = "primary",
     size = "md",
+    fullWidth = false,
     type = "button",
     disabled = false,
     loading = false,
@@ -48,6 +49,7 @@ export default function Button({
                 disabled:cursor-not-allowed disabled:opacity-50
                 ${variants[variant] ?? variants.primary}
                 ${sizes[size] ?? sizes.md}
+                ${fullWidth ? "w-full" : "w-fit"}
                 ${className}
             `}
             {...props}
