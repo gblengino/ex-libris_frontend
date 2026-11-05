@@ -3,13 +3,18 @@
 import {
     createContext,
     useContext,
-    useState 
+    useState,
+    useEffect
 } from "react";
 
 const AuthContext = createContext(null)
 
 export function AuthProvider({children, initialUser = null}) {
     const [user, setUser] = useState(initialUser);
+
+    useEffect(() => {
+        setUser(initialUser);
+    }, [initialUser]);
 
     const isAuthenticated = Boolean(user)
 

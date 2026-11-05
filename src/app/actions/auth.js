@@ -38,6 +38,7 @@ export async function login(_prevState, formData) {
 
     await setTokens(tokens);
 
+    refresh();
     redirect("/");
 
 }
