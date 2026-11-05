@@ -1,0 +1,67 @@
+"use server";
+
+import { redirect } from "next/navigation";
+import { setTokens, getRefreshToken, clearTokens } from "@/lib/auth";
+import { refresh } from "next/cache";
+import { API_URL } from "@/lib/api";
+
+export async function login(_prevState, formData) {
+    const credentials = {
+        username: formData.get("username"),
+        password: formData.get("password"),
+    };
+
+    let res;
+
+    try {
+        res = await fetch(`${API_URL}/api/auth/login/`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(credentials),
+            cache: "no-store",
+        });
+    } catch {
+        return { error: "No se pudo conectar con el servidor." };
+    }
+
+    if (res.status === 401) {
+        return { error: "Usuario o contraseña incorrectos." };
+    }
+
+    if (!res.ok) {
+        return { error: "No se pudo iniciar sesión." };
+    }
+
+    const tokens = await res.json();
+
+    await setTokens(tokens);
+
+    redirect("/");
+
+}
+
+export async function logout() {
+    const referesh = await getRefreshToken()
+
+    try {
+        if (referesh) {
+            await fetch(`${API_URL}/api/auth/logout/`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({refresh}),
+                cache: "no-store",
+            });
+        }
+    } finally {
+        /* Finally para eliminar las cookies locales incluso
+        si la peticion falla, haciendo efectivo el logout. */
+        await clearTokens();
+    }
+
+    redirect("/login");
+}
+
