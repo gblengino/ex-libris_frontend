@@ -1,15 +1,23 @@
 "use client"
 
 import { useState } from "react"
-import Image from "next/image"
+
 import Link from "next/link"
+import { useAuth } from "../providers/AuthProvider"
 
 import { ThemeToggleButton } from "../ui/ThemeToggleButton"
 import { Menu, X, BookOpen } from "lucide-react"
+import { logout } from "@/app/actions/auth"
+import Button from "../ui/Button"
 
 export default function NavBar() {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { isAuthenticated } = useAuth();
+
+    const handleLogout = async () => {
+        await logout();
+    }
 
     return (
         <header className="w-full h-18 relative flex justify-between py-4 px-8">
@@ -38,6 +46,13 @@ export default function NavBar() {
             </div>
 
             {/* Auth Desktop */}
+            { isAuthenticated ? (
+                <div className="hidden md:flex items-center">
+                    <Button onClick={handleLogout} variant="danger">
+                        Cerrar sesión
+                    </Button>
+                </div>
+            ) : (
             <div className="hidden md:flex gap-4 items-center">
                 <Link href="/login" className="px-4 py-2 border-ink border rounded-xl 
                 transition-colors hover:text-burgundy hover:border-burgundy
@@ -51,7 +66,7 @@ export default function NavBar() {
                     Crear Cuenta
                 </Link>
             </div>
-            
+            )}
             {/* Boton hamburger para mobile */}
             <button className="md:hidden" aria-label="Abrir menú"
             onClick={()=> setIsMenuOpen(!isMenuOpen)} >

@@ -8,9 +8,14 @@
   --ink: #1b263b;
   --burgundy: #6b2d3c;
   --gold: #c5a059;
-  --cotton: #ffffff;
+  --surface: #C8D0D9;
+  --surface-contrast: #182536;
+  --on-surface-contrast: #E8E2D6;
+  --cotton: #F2F1EE;
   --footer-background: #1b263b;
   --footer-foreground: #f5f2eb;
+  --danger: #B91C1C;
+  --on-danger: #FFFFFF;
 
   /* Elementos de interfaz */
   --border: #ded8cc;
@@ -23,16 +28,21 @@
 }
 
 .dark {
-  /* Identidad visual */
-  --paper: #24231f;
-  --ink: #e8e2d6;
-  --burgundy: #a65365;
-  --gold: #d5b574;
-  --cotton: #302f2a;
+  /* Identidad visual - Dark Mode */
+  --paper: #111923;
+  --ink: #DCE5EF;
+  --burgundy: #6b2d3c;
+  --gold: #AFC2D9;
+  --surface: #202D3D;
+  --surface-contrast: #182536;
+  --on-surface-contrast: #E8E2D6;
+  --cotton: #182332;
+  --danger: #F87171;
+  --on-danger: #1C1917;
 
   /* Elementos de interfaz */
-  --border: #454139;
-  --muted: #aaa397;
+  --border: #40536B;
+  --muted: #AABBD0;
 
   /* Colores semánticos */
   --background: var(--paper);
@@ -46,7 +56,12 @@
   --color-ink: var(--ink);
   --color-burgundy: var(--burgundy);
   --color-gold: var(--gold);
+  --color-surface: var(--surface);
+  --color-surface-contrast: var(--surface-contrast);
+  --color-on-surface-contrast: var(--on-surface-contrast);
   --color-cotton: var(--cotton);
+  --color-danger: var(--danger);
+  --color-on-danger: var(--on-danger);
   --color-border: var(--border);
   --color-muted: var(--muted);
   --color-footer-background: var(--footer-background);

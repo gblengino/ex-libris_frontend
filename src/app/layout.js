@@ -1,5 +1,9 @@
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Suspense } from "react";
+
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import AuthProviderLoader from "@/components/providers/AuthProviderLoader";
+
+import { Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -20,9 +24,10 @@ export const metadata = {
   },
   description:
     "Una plataforma dedicada a la lectura, el análisis y la crítica literaria.",
-};
-
-export default function RootLayout({ children }) {
+  };
+  
+  
+export default async function RootLayout({ children }) {
   return (
     <html
       lang="es"
@@ -30,7 +35,11 @@ export default function RootLayout({ children }) {
     >
       <body>
         <ThemeProvider>
-          {children}
+          <Suspense fallback={null}>
+            <AuthProviderLoader>
+              {children}
+            </AuthProviderLoader>
+          </Suspense>
         </ThemeProvider>
       </body>
     </html>
