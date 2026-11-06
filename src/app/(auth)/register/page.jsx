@@ -39,15 +39,15 @@ export default function RegisterPage() {
     }
 
     return(
-        <section className="w-full max-w-md rounded-2xl border border-paper/10
-            bg-surface-contrast p-8 text-on-surface-contrast">
+        <section className="w-full max-w-md rounded-2xl border border-ink/20
+            bg-surface p-8 text-ink">
 
             <header className="mb-2 flex flex-col items-center text-center">
                 <h1 className="font-display text-4xl uppercase tracking-wide">
                     Ex Libris
                 </h1>
 
-                <div className="h-px w-16 bg-on-surface-contrast/30 my-2"/>
+                <div className="h-px w-16 bg-ink/70 my-2"/>
 
                 <h2 className="font-serif text-xl">
                     Crear cuenta
@@ -91,7 +91,7 @@ export default function RegisterPage() {
                         {...register("password")}
                     />
                     <div className="space-y-1 px-1">
-                        <p className="text-sm font-medium text-on-surface-contrast">
+                        <p className="text-sm font-medium text-ink">
                         Tu contraseña debe:
                         </p>
 
@@ -131,11 +131,11 @@ export default function RegisterPage() {
                     {isPending ? "Creando tu cuenta..." : "Creá tu cuenta"}
                 </Button>
 
-                <p className="text-center text-sm text-on-surface-contrast/60">
+                <p className="text-center text-sm text-ink/60">
                     ¿Ya tenés una cuenta?{" "}
                     <Link
                         href="/login"
-                        className="text-on-surface-contrast underline decoration-on-surface-contrast/40
+                        className="text-ink underline decoration-ink/40
                             underline-offset-4 transition hover:decoration-ink "
                     >
                         Iniciá sesión
