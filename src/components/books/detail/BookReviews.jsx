@@ -9,7 +9,7 @@ export default async function BookReviews({ id }) {
     return (
         <article>
             <h2 className="text-center text-2xl">Reseñas</h2>
-            <ReviewList reviews={reviews.results} className="mt-4 mb-8"/>
+            <ReviewList reviews={reviews.results} bookInfo={false} className="mt-4 mb-8"/>
         </article>
     )
 }
