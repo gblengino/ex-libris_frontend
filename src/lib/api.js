@@ -7,7 +7,7 @@ export const API_URL = process.env.API_URL;
 export const ENDPOINTS = {
     books: "/api/catalog/books/",
     reviews: "/api/reviews/",
-    comments: "/api/reviews/comments/",
+    comments: "/api/comments/",
     readingList: "/api/readinglist/",
     profile: "/api/users/profile/profile/",
     register: "/api/auth/register/"
