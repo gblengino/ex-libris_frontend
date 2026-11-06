@@ -1,26 +1,41 @@
 "use client";
 
-import { startTransition, useActionState } from "react";
+import { startTransition, useActionState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
-import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { commentSchema } from "@/app/validations/data";
-import { createComment } from "@/app/actions/comments";
+import { createComment, updateComment } from "@/app/actions/comments";
 
 import TextArea from "@/components/ui/TextArea";
 import Button from "@/components/ui/Button";
 
-export default function CommentForm({ reviewId }) {
+export default function CommentForm({ reviewId = null, initialData = null, onSuccess }) {
 
     const router = useRouter();
 
+    const onSuccessRef = useRef(onSuccess);
+    useEffect(() => {
+        onSuccessRef.current = onSuccess;
+    });
+
+    const action = initialData 
+    ? updateComment.bind(null, initialData.id) 
+    : createComment.bind(null, reviewId);
     
+    const initialState = {
+        success: false,
+        errors: {},
+    }
+
     const [state, formAction, isPending] = useActionState(
-        createComment.bind(null, reviewId),
-        null
+        action,
+        initialState
     );
+    
+    /* iniciacion del useForm con commentSchema, destacar que la id de la
+        review se la paso .bind() en el useActionState */
     const {
         register,
         handleSubmit,
@@ -29,10 +44,25 @@ export default function CommentForm({ reviewId }) {
     } = useForm({
         resolver: zodResolver(commentSchema),
         defaultValues: {
-            content: "",
+            content: initialData?.content ?? "",
         },
     });
+
+    useEffect(() => {
+        if (!state?.success) return;
+
+        if (!initialData) {
+            // Comentario nuevo: limpiar y refrescar para que aparezca en la lista
+            reset();
+            router.refresh();
+        }
+
+        // Edición: devolver el comentario actualizado al componente padre
+        onSuccessRef.current?.(state.comment);
+    }, [state, initialData, reset, router]);
+
     
+    /* Funcion onSubmit para el comentario */
     const onSubmit = (data) => {
         const formData = new FormData();
         
@@ -42,13 +72,6 @@ export default function CommentForm({ reviewId }) {
             formAction(formData);
         });
     };
-    
-    useEffect(() => {
-    if (state?.success) {
-            reset();
-            router.refresh();
-        }
-    }, [state, reset, router]);
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
@@ -74,7 +97,11 @@ export default function CommentForm({ reviewId }) {
                     type="submit"
                     loading={isPending}
                 >
-                    {isPending ? "Publicando comentario..." : "Publicar comentario"}
+                    {
+                        initialData 
+                        ? (isPending ? "Guardando comentario..." : "Guardar comentario")
+                        : (isPending ? "Publicando comentario..." : "Publicar comentario")
+                    }
                 </Button>
             </div>
         </form>
