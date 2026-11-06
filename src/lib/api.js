@@ -13,6 +13,8 @@ export const ENDPOINTS = {
     register: "/api/auth/register/"
 }
 
+export const PAGE_SIZE = 10;
+
 export async function apiFetch(path, options = {}) {
     const accessToken = await getToken();
 
