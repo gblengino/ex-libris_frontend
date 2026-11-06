@@ -2,6 +2,7 @@ export default function Input({
     label,
     error,
     id,
+    className = "",
     ...props
 }) {
     return (
@@ -13,13 +14,12 @@ export default function Input({
             <input
                 id={id}
                 {...props}
-                className="
-                    w-full rounded-lg border border-on-surface-contrast/20
-                    bg-on-surface-contrast/5 px-4 py-3 text-paper
-                    placeholder:text-on-surface-contrast/30 outline-none
-                    transition focus:border-on-surface-contrast/60
-                    focus:bg-paper/10
-                "
+                className={`
+                    w-full rounded-lg border border-ink/50
+                    bg-surface/5 px-4 py-2 text-ink
+                    placeholder:text-ink/50 outline-none
+                    transition focus:border-ink
+                    focus:bg-paper/10 ${className}`}
             />
 
             {error && (

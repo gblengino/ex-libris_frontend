@@ -35,11 +35,11 @@ export default function LoginPage() {
     }
 
     return(
-        <section className="w-full max-w-md rounded-2xl border border-paper/10
-            bg-surface-contrast p-8 text-on-surface-contrast">
+        <section className="w-full max-w-md rounded-2xl border border-ink/20
+            bg-surface p-8 text-ink shadow-xl">
 
             <header className="mb-2 flex flex-col items-center text-center">
-                <span className="font-serif text-sm italic tracking-widest text-on-surface-contrast/80">
+                <span className="font-serif text-sm italic tracking-widest text-ink/80">
                     Bienvenido de nuevo
                 </span>
 
@@ -47,7 +47,7 @@ export default function LoginPage() {
                     Ex Libris
                 </h1>
 
-                <div className="h-px w-16 bg-on-surface-contrast/30 my-2"/>
+                <div className="h-px w-16 bg-ink/70 my-2"/>
 
                 <h2 className="font-serif text-xl">
                     Iniciar sesión
@@ -95,12 +95,12 @@ export default function LoginPage() {
                     {isPending ? "Iniciando sesión..." : "Iniciar sesión"}
                 </Button>
 
-                <p className="text-center text-sm text-on-surface-contrast/60">
+                <p className="text-center text-sm text-ink/60">
                     ¿Todavía no tenés una cuenta?{" "}
                     <Link
                         href="/register"
-                        className="text-on-surface-contrast underline decoration-on-surface-contrast/40
-                            underline-offset-4 transition hover:decoration-ink "
+                        className="text-ink underline decoration-ink/40
+                            underline-offset-4 transition hover:decoration-ink"
                     >
                         Registrate
                     </Link>

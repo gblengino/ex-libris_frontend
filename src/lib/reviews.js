@@ -12,3 +12,26 @@ export async function getLatestReviews() {
 
     return data.results.slice(0, 3)
 }
+
+export async function getBookReviews(bookId, page = 1) {
+
+    const params = new URLSearchParams({
+        book: String(bookId),
+        page: String(page)
+    })
+
+    const res = await apiFetch(`${ENDPOINTS.reviews}?${params}`)
+    
+    if (!res.ok) {
+        throw new Error("Failed to fetch latest reviews");
+    }
+
+    const data = await res.json()
+
+    return {
+        count: data.count,
+        next: data.next,
+        previous: data.previous,
+        results: data.results,
+    }
+}
