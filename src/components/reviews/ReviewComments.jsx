@@ -2,6 +2,7 @@ import { getReviewComments } from "@/lib/reviews"
 import Comment from "./comments/Comment"
 import CommentForm from "./comments/CommentForm"
 import { getCurrentUser } from "@/lib/data"
+import CommentsList from "./comments/CommentsList";
 
 export default async function ReviewComments({reviewId}) {
     
@@ -18,9 +19,7 @@ export default async function ReviewComments({reviewId}) {
                 <CommentForm reviewId={reviewId}/>
                 }
                 <hr className="bg-ink my-4" />
-                {comments.results.map((comment) => (
-                    <Comment key={comment.id} comment={comment}/>
-                ))}
+                <CommentsList initialComments={comments.results}/>
             </div>
         </section>
     )
