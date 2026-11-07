@@ -1,7 +1,7 @@
 import { getDetailBook } from "@/lib/books"
 import Image from "next/image";
 import Badge from "@/components/ui/Badge";
-import { Star } from "lucide-react";
+import { Star, BookOpen } from "lucide-react";
 
 export default async function BookDetail({ id }) {
     
@@ -20,8 +20,6 @@ export default async function BookDetail({ id }) {
         genres,
         is_in_reading_list
     } = book
-
-    console.log(average_rating)
 
     return (
         <article className="flex gap-3 py-8">
