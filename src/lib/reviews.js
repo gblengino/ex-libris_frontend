@@ -60,8 +60,9 @@ export async function getReviews(page = 1) {
 export async function getDetailReview(id) {
     const res = await apiFetch(`${ENDPOINTS.reviews}${id}/`)
     
+    if (res.status === 404) return null;
     if (!res.ok) {
-        throw new Error("Failed to fetch book");
+        throw new Error("Failed to fetch review");
     }
 
     const data = await res.json()
