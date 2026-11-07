@@ -11,7 +11,7 @@ export default async function BookCatalog({ searchParams }) {
     const query = await searchParams;
     const page = Math.max(1, Number(query.page) || 1);
 
-    const books = await getBooks(page)
+    const books = await getBooks({ ...query, page })
 
     const totalPages = Math.ceil(books.count / PAGE_SIZE)
 
