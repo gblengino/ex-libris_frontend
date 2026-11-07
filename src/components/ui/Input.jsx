@@ -7,7 +7,7 @@ export default function Input({
 }) {
     return (
         <div className="flex flex-col gap-2">
-            <label htmlFor={id} className="font-serif text-sm">
+            <label htmlFor={id} className="font-sans text-sm">
                 {label}
             </label>
 
