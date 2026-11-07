@@ -1,6 +1,6 @@
 const variants = {
     primary:
-        "bg-burgundy text-on-surface-contrast hover:brightness-110",
+        "bg-burgundy text-on-burgundy hover:brightness-110",
 
     secondary:
         "bg-surface text-on-surface hover:brightness-95",
