@@ -1,7 +1,6 @@
-import { getReviewComments } from "@/lib/reviews"
-import Comment from "./comments/Comment"
-import CommentForm from "./comments/CommentForm"
 import { getCurrentUser } from "@/lib/data"
+import { getReviewComments } from "@/lib/reviews"
+import CommentForm from "./comments/CommentForm"
 import CommentsList from "./comments/CommentsList";
 
 export default async function ReviewComments({reviewId}) {
@@ -9,8 +8,6 @@ export default async function ReviewComments({reviewId}) {
     const user = await getCurrentUser();
     const comments = await getReviewComments(reviewId);
     
-    console.log("User", user)
-
     return (
         <section className="mt-12 border-t border-ink">
             <h2 className="text-xl font-semibold my-4">Comentarios</h2>
