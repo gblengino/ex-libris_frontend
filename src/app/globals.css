@@ -7,6 +7,7 @@
   --paper: #f5f2eb;
   --ink: #1b263b;
   --burgundy: #6b2d3c;
+  --on-burgundy: #F5F2EB;
   --gold: #c5a059;
   --surface: #EAE5DA;
   --surface-contrast: #182536;
@@ -31,7 +32,8 @@
   /* Identidad visual - Dark Mode */
   --paper: #111923;
   --ink: #DCE5EF;
-  --burgundy: #6b2d3c;
+  --burgundy: #D07A8D;
+  --on-burgundy: #111923; 
   --gold: #AFC2D9;
   --surface: #202D3D;
   --surface-contrast: #182536;
@@ -55,6 +57,7 @@
   --color-paper: var(--paper);
   --color-ink: var(--ink);
   --color-burgundy: var(--burgundy);
+  --color-on-burgundy: var(--on-burgundy);
   --color-gold: var(--gold);
   --color-surface: var(--surface);
   --color-surface-contrast: var(--surface-contrast);

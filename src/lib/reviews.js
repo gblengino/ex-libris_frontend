@@ -23,7 +23,29 @@ export async function getBookReviews(bookId, page = 1) {
     const res = await apiFetch(`${ENDPOINTS.reviews}?${params}`)
     
     if (!res.ok) {
-        throw new Error("Failed to fetch latest reviews");
+        throw new Error("Failed to fetch book reviews");
+    }
+
+    const data = await res.json()
+
+    return {
+        count: data.count,
+        next: data.next,
+        previous: data.previous,
+        results: data.results,
+    }
+}
+
+export async function getUserReviews(userId, page = 1) {
+    const params = new URLSearchParams({
+        user: String(userId),
+        page: String(page)
+    })
+
+    const res = await apiFetch(`${ENDPOINTS.reviews}?${params}`)
+
+    if (!res.ok) {
+        throw new Error("Failed to fetch user reviews");
     }
 
     const data = await res.json()
@@ -60,8 +82,9 @@ export async function getReviews(page = 1) {
 export async function getDetailReview(id) {
     const res = await apiFetch(`${ENDPOINTS.reviews}${id}/`)
     
+    if (res.status === 404) return null;
     if (!res.ok) {
-        throw new Error("Failed to fetch book");
+        throw new Error("Failed to fetch review");
     }
 
     const data = await res.json()

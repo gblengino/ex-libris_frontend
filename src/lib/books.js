@@ -1,11 +1,14 @@
 import "server-only"
 import { apiFetch, ENDPOINTS } from "./api"
 
-export async function getBooks(page = 1) {
+const ALLOWED_PARAMS = ["search", "genre", "author", "publisher", "orgering", "page"];
 
-    const params = new URLSearchParams({
-        page: String(page),
-    })
+export async function getBooks(query = {}) {
+
+    const params = new URLSearchParams();
+    for (const key of ALLOWED_PARAMS) {
+        if (query[key]) params.set(key, query[key]);
+    }
 
     const res = await apiFetch(`${ENDPOINTS.books}?${params}`)
     

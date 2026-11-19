@@ -6,7 +6,7 @@ import Link from "next/link"
 import { useAuth } from "../providers/AuthProvider"
 
 import { ThemeToggleButton } from "../ui/ThemeToggleButton"
-import { Menu, X, BookOpen } from "lucide-react"
+import { Menu, X, BookOpen, User, BookA, Pencil, NotebookPen } from "lucide-react"
 import { logout } from "@/app/actions/auth"
 
 import Container from "./Container"
@@ -32,17 +32,21 @@ export default function NavBar() {
                             Ex Libris
                         </h1>
                     </Link>
-                    <div className="hidden md:flex gap-5 px-8 items-center justify-start">
-                        <Link href="/books" 
-                        className="text-ink transition-colors duration-200
-                        hover:text-burgundy focus-visible:outline-2 focus-visible:outline-gold">
+                    <div className="hidden md:flex px-8 items-center justify-start">
+                        <LinkButton href="/books" variant="ghost">
+                            <BookA size={20}/>
                             Catálogo
-                        </Link>
-                        <Link href="/reviews"
-                        className="text-ink transition-colors duration-200
-                        hover:text-burgundy focus-visible:outline-2 focus-visible:outline-gold">
+                        </LinkButton>
+                        <LinkButton href="/reviews" variant="ghost">
+                            <NotebookPen size={20}/>
                             Reseñas
-                        </Link>
+                        </LinkButton>
+                        { isAuthenticated && (
+                            <LinkButton href="/profile/me" variant="ghost">
+                                <User size={20}/>
+                                Mi Perfil
+                            </LinkButton>
+                        )}
                     </div>
                 </nav>
                 <div className="px-2">
