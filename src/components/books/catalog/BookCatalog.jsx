@@ -1,4 +1,4 @@
-import { getBooks } from "@/lib/books";
+import { getBooks, getGenres } from "@/lib/books";
 import BookFilters from "./BookFilters";
 import BookSearch from "./BookSearch";
 import BooksGrid from "./BooksGrid";
@@ -11,7 +11,10 @@ export default async function BookCatalog({ searchParams }) {
     const query = await searchParams;
     const page = Math.max(1, Number(query.page) || 1);
 
-    const books = await getBooks({ ...query, page })
+    const [books, genres] = await Promise.all([
+        getBooks({ ...query, page }),
+        getGenres(),
+    ]);
 
     const totalPages = Math.ceil(books.count / PAGE_SIZE)
 
@@ -19,7 +22,7 @@ export default async function BookCatalog({ searchParams }) {
         <div className="grid grid-cols-1 lg:grid-cols-[260px_minmax(0,1fr)] gap-8">
             <aside className="lg:sticky lg:top-24 lg:self-start lg:border-r 
             lg:border-outline/20 lg:pr-6">
-                <BookFilters/>
+                <BookFilters genres={genres}/>
             </aside>
 
             <section>
