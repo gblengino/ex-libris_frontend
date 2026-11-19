@@ -50,10 +50,11 @@ export default async function ReviewDetail({ id }) {
                 </h2>
             </div>
             <div className="inline-flex justify-between items-center">
-                <div className="flex gap-1 items-center">
+                <LinkButton href={`/profile/${author.id}`} variant="ghost" size="sm"
+                    className="flex gap-1 items-center">
                     <UserBadge/>
                     {author.username}
-                </div>
+                </LinkButton>
                 <div className="flex gap-2 items-center text-amber-500">
                     <span className="text-lg">
                         {rating}/10
