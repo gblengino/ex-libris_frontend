@@ -9,6 +9,7 @@ export const ENDPOINTS = {
     reviews: "/api/reviews/",
     comments: "/api/comments/",
     readingList: "/api/readinglist/",
+    users: "/api/users",
     profile: "/api/users/profile/profile/",
     register: "/api/auth/register/",
 };
