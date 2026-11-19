@@ -1,18 +1,28 @@
 import { getDetailReview } from "@/lib/reviews";
+import { getCurrentUser } from "@/lib/data";
 
 import Image from "next/image";
-import { Star, BookOpen, Heart } from "lucide-react";
+import { notFound } from "next/navigation";
+import { Star, BookOpen, Heart, Edit } from "lucide-react";
 
 import Badge from "../ui/Badge";
 import Link from "next/link";
 import UserBadge from "../ui/UserBadge";
+import LinkButton from "../ui/LinkButton";
+import DeleteReviewButton from "./DeleteReviewButton";
 
 export default async function ReviewDetail({ id }) {
     
     const review = await getDetailReview(id)
+    
+    if (!review) {
+        notFound();
+    }
+    
+    const user = await getCurrentUser();
 
     const {
-        user,
+        user: author,
         book,
         title,
         content,
@@ -21,6 +31,8 @@ export default async function ReviewDetail({ id }) {
         is_liked,
         created_at,
     } = review
+
+    const isAuthor = user?.id === author.id
 
     return (
         <article className="flex flex-col gap-2">
@@ -40,7 +52,7 @@ export default async function ReviewDetail({ id }) {
             <div className="inline-flex justify-between items-center">
                 <div className="flex gap-1 items-center">
                     <UserBadge/>
-                    {user.username}
+                    {author.username}
                 </div>
                 <div className="flex gap-2 items-center text-amber-500">
                     <span className="text-lg">
@@ -93,14 +105,27 @@ export default async function ReviewDetail({ id }) {
                     {content}
                 </p>
             </div>
-            <div className="inline-flex items-center gap-2 text-danger">
-                <Heart 
-                    size={16} 
-                    className={is_liked ? "fill-current" : ""}
-                />
-                <span className="text-lg">
-                    {likes_count} Me gusta
-                </span>
+            <div className="flex justify-between">
+                <div className="inline-flex items-center gap-2 text-danger">
+                    <Heart 
+                        size={16} 
+                        className={is_liked ? "fill-current" : ""}
+                    />
+                    <span className="text-lg">
+                        {likes_count} Me gusta
+                    </span>
+                </div>
+                <div>
+                    { isAuthor && (
+                        <div className="flex gap-2">
+                            <LinkButton size="sm" variant="outline" href={`/reviews/${id}/edit`}>
+                                <Edit/>
+                                Editar
+                            </LinkButton>
+                            <DeleteReviewButton reviewId={id}/>
+                        </div>
+                    )}
+                </div>
             </div>
         </article>
     )

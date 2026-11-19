@@ -99,21 +99,35 @@ export async function deleteReview(reviewId) {
         });
 
         if (res.status === 401 || res.status === 403) {
-            return { success: false, error: "No tenés permiso para borrar esta reseña" };
+            return {
+                success: false,
+                error: "No tenés permiso para borrar esta reseña"
+            };
         }
 
         if (res.status === 404) {
-            return { success: false, error: "La reseña ya no existe" };
+            return {
+                success: false,
+                error: "La reseña ya no existe"
+            };
         }
 
         if (!res.ok) {
-            return { success: false, error: "No se pudo borrar la reseña" };
+            return {
+                success: false,
+                error: "No se pudo borrar la reseña"
+            };
         }
-    } catch {
-        return { success: false, error: "Error de conexión" };
-    }
 
-    revalidatePath("/reviews");
-    revalidatePath("/profile");
-    redirect("/profile");
+        revalidatePath("/reviews");
+        revalidatePath("/profile");
+
+        return { success: true };
+
+    } catch {
+        return {
+            success: false,
+            error: "Error de conexión"
+        };
+    }
 }
