@@ -1,15 +1,17 @@
 /** @type {import('next').NextConfig} */
+
+const apiUrl = new URL(process.env.API_URL);
+
 const nextConfig = {
   /* config options here */
   cacheComponents: true,
   partialPrefetching: true,
   images: {
-    dangerouslyAllowLocalIP: true,
     remotePatterns: [
       {
-        protocol: "http",
-        hostname: "localhost",
-        port: "8000",
+        protocol: apiUrl.protocol.slice(0, -1),
+        hostname: apiUrl.hostname,
+        port: apiUrl.port,
         pathname: "/media/**",
       },
     ],
