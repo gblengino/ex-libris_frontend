@@ -58,26 +58,32 @@ export async function getUserReviews(userId, page = 1) {
     }
 }
 
-export async function getReviews(page = 1) {
+
+export async function getReviews(page = 1, book = null) {
     const params = new URLSearchParams({
         page: String(page)
-    })
+    });
 
-    const res = await apiFetch(`${ENDPOINTS.reviews}?${params}`)
-    
+    if (book) {
+        params.set("book", String(book));
+    }
+
+    const res = await apiFetch(`${ENDPOINTS.reviews}?${params}`);
+
     if (!res.ok) {
         throw new Error("Failed to fetch reviews");
     }
 
-    const data = await res.json()
+    const data = await res.json();
 
     return {
         count: data.count,
         next: data.next,
         previous: data.previous,
         results: data.results,
-    }   
+    };
 }
+
 
 export async function getDetailReview(id) {
     const res = await apiFetch(`${ENDPOINTS.reviews}${id}/`)
