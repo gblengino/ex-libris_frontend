@@ -99,5 +99,5 @@ export async function register(_prevState, formData) {
         }
     }
 
-    redirect("login");
+    redirect("/login");
 }
