@@ -6,20 +6,21 @@ import ReviewList from "./ReviewList";
 export default async function ReviewCatalog({ searchParams }) {
     const query = await searchParams;
     const page = Math.max(1, Number(query.page) || 1);
+    const book = query.book || null;
 
-    const reviews = await getReviews(page)
+    const reviews = await getReviews(page, book);
 
-    const totalPages = Math.ceil(reviews.count / PAGE_SIZE)
+    const totalPages = Math.ceil(reviews.count / PAGE_SIZE);
 
     return (
         <div>
-            <ReviewList reviews={reviews.results}/>
-            <Paginator 
+            <ReviewList reviews={reviews.results} />
+            <Paginator
                 currentPage={page}
                 totalPages={totalPages}
                 basePath="/reviews"
                 queryParams={query}
             />
         </div>
-    )
+    );
 }
