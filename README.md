@@ -1,14 +1,18 @@
 # Ex-Libris 📚
 
-**Ex-Libris** es una plataforma web orientada a la comunidad lectora, diseñada para descubrir libros, compartir opiniones y conectar con otros lectores a través de reseñas y comentarios.
+**Ex-Libris** es una plataforma web orientada a la comunidad lectora, diseñada para descubrir libros, compartir opiniones y conectar con otros lectores a través de reseñas, comentarios e interacciones sociales.
 
 El proyecto propone un espacio digital para el intercambio de experiencias literarias, combinando un catálogo de libros con funcionalidades sociales y herramientas para organizar las lecturas personales.
 
 ## ✨ Características principales
 
 - **Catálogo literario:** exploración de libros, autores, editoriales y géneros.
+- **Búsqueda y filtros:** búsqueda de libros y filtrado por género y autor.
+- **Ordenamiento y paginación:** organización de los resultados según distintos criterios.
+- **Detalle de libros:** consulta de información y reseñas asociadas a cada obra.
 - **Reseñas:** publicación y consulta de opiniones y valoraciones sobre libros.
-- **Interacción social:** comentarios y likes en las reseñas.
+- **Comentarios:** creación, edición y eliminación de comentarios en las reseñas.
+- **Interacción social:** likes en reseñas y comentarios.
 - **Lista de lectura:** organización de libros según el estado de lectura.
 - **Autenticación:** registro e inicio de sesión mediante JWT.
 - **Perfiles de usuario:** consulta de información y actividad de los lectores.
@@ -17,6 +21,7 @@ El proyecto propone un espacio digital para el intercambio de experiencias liter
 
 - [Next.js](https://nextjs.org/) 16
 - [React](https://react.dev/) 19
+- [JavaScript](https://developer.mozilla.org/es/docs/Web/JavaScript)
 - [Tailwind CSS](https://tailwindcss.com/) 4
 - [React Hook Form](https://react-hook-form.com/)
 - [Zod](https://zod.dev/)
@@ -26,7 +31,7 @@ El proyecto propone un espacio digital para el intercambio de experiencias liter
 
 El frontend consume una API REST desarrollada con **Django REST Framework**, correspondiente al proyecto de Ingeniería de Software.
 
-La API proporciona los servicios necesarios para la autenticación, consulta del catálogo literario y gestión de reseñas, comentarios e interacciones entre usuarios.
+La API proporciona los servicios necesarios para la autenticación, consulta y filtrado del catálogo literario, gestión de reseñas y comentarios, interacciones entre usuarios y listas de lectura.
 
 - **Repositorio:** [Ex-Libris API](https://github.com/gblengino/ex-libris_api)
 
@@ -53,13 +58,13 @@ npm install
 
 ### 3. Configurar las variables de entorno
 
-Crear un archivo `.env.local` en la raíz del proyecto, tomando como referencia el archivo `.env.example`.
+Crear un archivo `.env.local` en la raíz del proyecto, tomando como referencia `.env.example`.
 
 ```env
 API_URL=http://localhost:8000
 ```
 
-**Variables disponibles:**
+**Variables de entorno:**
 
 | Variable | Descripción |
 |---|---|
@@ -75,7 +80,7 @@ npm run dev
 
 La aplicación estará disponible en:
 
-http://localhost:3000
+[http://localhost:3000](http://localhost:3000)
 
 ### Otros comandos disponibles
 
@@ -87,26 +92,24 @@ npm run lint   # Analizar el código con ESLint
 
 ## 🧪 Testing
 
-La configuración del entorno de pruebas automatizadas se encuentra pendiente de implementación.
+La implementación de pruebas unitarias automatizadas correspondiente al requisito R7 quedó pendiente.
 
-Por el momento, el proyecto no dispone de un comando `npm run test`.
+Por este motivo, el proyecto no dispone actualmente de una suite de pruebas unitarias ni de un comando `npm run test`.
 
-## 🖼️ Capturas de pantalla
+## 🌐 Demo
 
-Una vez finalizado el desarrollo se incluirán capturas de pantalla.
+La aplicación cuenta con un despliegue en Vercel:
 
-## 📌 Demo y planificación
-
-- **Aplicación desplegada:** Pendiente de despliegue.
-- **Tablero Kanban:** No utilizado. El proyecto fue desarrollado individualmente.
-
-## 📖 Estado del proyecto
-
-Ex-Libris se encuentra actualmente en desarrollo. Esta versión representa el estado actual del frontend y sus funcionalidades implementadas hasta la fecha de entrega.
-
-El desarrollo continúa, por lo que algunas funcionalidades, componentes y aspectos de la interfaz pueden encontrarse sujetos a modificaciones y mejoras.
+**[Ex-Libris - Aplicación web](https://ex-libris-neon.vercel.app/)**
 
 ## 👨‍💻 Autor
 
 **Giuliano Blengino**
 
+Proyecto desarrollado individualmente en el marco de la Tecnicatura en Desarrollo de Software.
+
+## 📌 Estado del proyecto
+
+Ex-Libris corresponde a la entrega final del frontend, con las funcionalidades principales implementadas e integradas con la API Backend.
+
+El desarrollo contempla la experiencia de navegación, gestión de usuarios, catálogo literario e interacciones sociales, quedando pendiente la implementación de las pruebas unitarias correspondientes al requisito R7.
