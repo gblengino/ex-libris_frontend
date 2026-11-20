@@ -1,46 +1,78 @@
-import Input from "../../ui/Input"
-import Select from "../../ui/Select"
+"use client";
 
-export default function BookFilters() {
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useUpdateQuery } from "@/hooks/useUpdateQuery";
+import { useDebouncedValue } from "@/hooks/useDebouncedValue";
+
+import Select from "@/components/ui/Select";
+import Input from "@/components/ui/Input";
+
+export default function BookFilters({ genres }) {
+    const searchParams = useSearchParams();
+    const updateQuery = useUpdateQuery();
+
+    const selectedGenre = searchParams.get("genre") || "";
+    const selectedAuthor = searchParams.get("author") || "";
+
+    const [author, setAuthor] = useState(selectedAuthor);
+    const debouncedAuthor = useDebouncedValue(author, 400);
+
+    // Sincronizar con la URL (atrás/adelante).
+    useEffect(() => {
+        setAuthor(selectedAuthor);
+    }, [selectedAuthor]);
+
+    // Actualizar URL después del debounce.
+    useEffect(() => {
+        if (debouncedAuthor === selectedAuthor) return;
+
+        updateQuery("author", debouncedAuthor.trim());
+    }, [debouncedAuthor]);
+
     return (
-        <div className="flex flex-col gap-6">
-            <div className="flex items-center justify-between">
-                <h2 className="text-lg font-semibold">
-                    Filtros
-                </h2>
-                <button className="text-sm text-ink hover:underline hover:cursor-pointer">
-                    Limpiar
-                </button>
-            </div>
-            <div className="flex flex-col gap-4">
-                <h3 className="text-sm font-semibold">
+        <div className="space-y-6">
+            <div>
+                <label
+                    htmlFor="genre"
+                    className="block font-semibold mb-2"
+                >
                     Género
-                </h3>
-                <Select name="genre" id="genre" defaultValue="">
+                </label>
+
+                <Select
+                    id="genre"
+                    value={selectedGenre}
+                    onChange={(e) =>
+                        updateQuery("genre", e.target.value)
+                    }
+                >
                     <option value="">Todos los géneros</option>
-                    <option value="1">Fantasía</option>
-                    <option value="2">Ciencia ficción</option>
+
+                    {genres.map((genre) => (
+                        <option key={genre.id} value={genre.id}>
+                            {genre.name}
+                        </option>
+                    ))}
                 </Select>
             </div>
-            <div className="flex flex-col gap-4">
-                <h3 className="text-sm font-semibold">
-                    Autor
-                </h3>
-                <Input 
-                    type="text"
-                    placeholder="Buscar autor..."    
-                />
-            </div>
 
-            <div className="flex flex-col gap-4">
-                <h3 className="text-sm font-semibold">
-                    Editorial
-                </h3>
+            <div>
+                <label
+                    htmlFor="author"
+                    className="block font-semibold mb-2"
+                >
+                    Autor
+                </label>
+
                 <Input
+                    id="author"
                     type="text"
-                    placeholder="Buscar editorial..." 
+                    placeholder="Buscar por autor..."
+                    value={author}
+                    onChange={(e) => setAuthor(e.target.value)}
                 />
             </div>
         </div>
-    )
+    );
 }
